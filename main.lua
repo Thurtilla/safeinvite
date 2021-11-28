@@ -2,6 +2,7 @@ local myframe = CreateFrame("Frame")
 local inviteTablePlayer
 local inviteTableFriend
 local safeInviteName = "SafeInvite: "
+
 myframe:RegisterEvent("ADDON_LOADED")
 myframe:SetScript(
 	"OnEvent",
