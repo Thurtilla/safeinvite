@@ -1,0 +1,9 @@
+## Interface: 11401
+## Title: Safe invite
+## Author: Thurtilla
+## Version: 0.1
+## SavedVariables: safeinvite_status, safeinvite_inviteindex_PLAYER, safeinvite_inviteindex_FRIEND
+## SavedVariablesPerCharacter: safeinvite_status_single
+
+
+main.lua
