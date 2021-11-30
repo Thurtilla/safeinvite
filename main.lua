@@ -1,7 +1,7 @@
 local addonName = ...
-local myframe = CreateFrame("Frame")
 local printPrefix = addonName..": "
 
+local myframe = CreateFrame("Frame")
 myframe:RegisterEvent("ADDON_LOADED")
 myframe:SetScript(
 	"OnEvent",
@@ -10,37 +10,7 @@ myframe:SetScript(
 	end
 )
 
-SLASH_SAFEINVITE1, SLASH_SAFEINVITE2 = "/safeinvite", "/sinv"
-SlashCmdList["SAFEINVITE"] = function(msg)
-	if msg == "on" then
-		print(printPrefix .. "Addon will now hide 'Invite' from context menu's. Use /sinv off to show again.")
-		safeinvite_enabled = true
-		toggleOnContext()
-	elseif msg == "off" then
-		print(printPrefix .. "Addon is now disabled, to turn on, use /sinv on")
-		safeinvite_enabled = false
-		toggleOnContext()
-	else
-		print(printPrefix .. "Possible commands is:")
-		print(printPrefix .. "/sinv on - turns on removal of Invite from contexts")
-		print(printPrefix .. "/sinv off - turns off removal of Invite from contexts")
-	end
-end
-
-function myframe:ADDON_LOADED(name)
-	if name ~= addonName then
-		return
-	end
-	if safeinvite_enabled == nil then
-		print(printPrefix .. "First load, enabling addon")
-		safeinvite_enabled = true
-	end
-	if safeinvite_enabled == true then
-		toggleOnContext()
-	end
-end
-
-function toggleOnContext()
+local function toggleInviteOnContext()
 	if safeinvite_enabled then
 		for k, v in pairs({"PLAYER", "FRIEND"}) do
 			local popupMenu = UnitPopupMenus[v]
@@ -69,3 +39,34 @@ function toggleOnContext()
 		end
 	end
 end
+
+SLASH_SAFEINVITE1, SLASH_SAFEINVITE2 = "/safeinvite", "/sinv"
+SlashCmdList["SAFEINVITE"] = function(msg)
+	if msg == "on" then
+		print(printPrefix .. "Addon will now hide 'Invite' from context menu's. Use /sinv off to show again.")
+		safeinvite_enabled = true
+		toggleInviteOnContext()
+	elseif msg == "off" then
+		print(printPrefix .. "Addon is now disabled, to turn on, use /sinv on")
+		safeinvite_enabled = false
+		toggleInviteOnContext()
+	else
+		print(printPrefix .. "Possible commands is:")
+		print(printPrefix .. "/sinv on - turns on removal of Invite from contexts")
+		print(printPrefix .. "/sinv off - turns off removal of Invite from contexts")
+	end
+end
+
+function myframe:ADDON_LOADED(name)
+	if name ~= addonName then
+		return
+	end
+	if safeinvite_enabled == nil then
+		print(printPrefix .. "First load, enabling addon")
+		safeinvite_enabled = true
+	end
+	if safeinvite_enabled == true then
+		toggleInviteOnContext()
+	end
+end
+
