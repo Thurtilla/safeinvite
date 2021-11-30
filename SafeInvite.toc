@@ -1,6 +1,7 @@
 ## Interface: 11401
 ## Title: Safe invite
 ## Author: Thurtilla
+
 ## SavedVariables: safeinvite_enabled, safeinvite_inviteindex_PLAYER, safeinvite_inviteindex_FRIEND, safeinvite_table_PLAYER, safeinvite_table_FRIEND
 ## SavedVariablesPerCharacter: safeinvite_enabled_single
 
